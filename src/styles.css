@@ -6,3 +6,18 @@ purple-green.css
 */
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html,
+body {
+  margin: 0px;
+}
+
+.main-container {
+  margin-top: 5px;
+  padding: 10px;
+}
+
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}
