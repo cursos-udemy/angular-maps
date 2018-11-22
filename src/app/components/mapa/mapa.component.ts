@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Marcador } from "../../classes/marcador.class";
 import { MatSnackBar } from "@angular/material";
+import { MatDialog, MatDialogRef } from "@angular/material";
+import { MarcadorDialogComponent } from "./marcador-dialog.component";
 
 @Component({
   selector: "app-mapa",
@@ -19,7 +21,7 @@ export class MapaComponent implements OnInit {
   public lat = -34.688003;
   public lng = -58.729416;
 
-  constructor(public snackBar: MatSnackBar) {
+  constructor(public snackBar: MatSnackBar, private dialog: MatDialog) {
     this.marcadores = [];
     // let nuevoMarcador = new Marcador(-34.688003, -58.729416);
     // this.marcadores.push (nuevoMarcador);
@@ -37,6 +39,13 @@ export class MapaComponent implements OnInit {
     this.saveStorage();
   }
 
+  public editarMarcador(marcador: Marcador) {
+    const dialogRef = this.dialog.open(MarcadorDialogComponent, {
+      width: "250px",
+      data: { titulo: marcador.titulo, descripcion: marcador.descripcion }
+    });
+  }
+
   public borrarMarcador(index: number) {
     this.marcadores.splice(index, 1);
     this.openSnackBar("Marcador Eliminado", "Cerrar");
@@ -45,7 +54,7 @@ export class MapaComponent implements OnInit {
 
   private openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 2000,
+      duration: 2000
     });
   }
 
