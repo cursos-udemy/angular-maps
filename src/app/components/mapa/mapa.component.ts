@@ -44,6 +44,15 @@ export class MapaComponent implements OnInit {
       width: "250px",
       data: { titulo: marcador.titulo, descripcion: marcador.descripcion }
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        marcador.titulo = result.titulo;
+        marcador.descripcion = result.descripcion;
+        this.saveStorage();
+        this.openSnackBar("Marcador actualizado", "Cerrar");
+      }
+    });
   }
 
   public borrarMarcador(index: number) {
